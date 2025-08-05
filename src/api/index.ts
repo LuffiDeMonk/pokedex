@@ -1,7 +1,7 @@
 import axios, { type AxiosInstance, type AxiosRequestConfig } from "axios";
 
 const apiClient: AxiosInstance = axios.create({
-  baseURL: "https://pokeapi.co/api/v2",
+  baseURL: import.meta.env.VITE_POKEMON_BASE_API_URL,
 });
 
 apiClient.interceptors.response.use(

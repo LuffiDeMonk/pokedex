@@ -1,11 +1,7 @@
-export interface PokemonApiListResponse {
-  count: number;
-  next: string | null;
-  previous: string | null;
-  results: [
-    {
-      name: string;
-      url: string;
-    }
-  ];
+import type { PokeAPI } from "pokeapi-types";
+
+export interface PokemonCardDetails {
+  name: string;
+  sprites: PokeAPI.PokemonSprites;
+  types: PokeAPI.PokemonType
 }

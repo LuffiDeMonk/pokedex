@@ -6,9 +6,5 @@ export const useFetchPokemons = () => {
     queryKey: ["pokemon", "list"],
     queryFn: ({ signal }) => fetchPokemon({ signal }),
     staleTime: 10_000,
-    retry(_failureCount, error) {
-        console.log(error, 'testing error')
-        return false
-    },
-  });
+});
 };

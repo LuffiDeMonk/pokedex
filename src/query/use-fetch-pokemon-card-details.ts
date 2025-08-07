@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { fetchPokemonCardDetails } from "./fetch-pokemon-card-details";
+import { fetchPokemonCardDetails } from "../api-client/fetch-pokemon-card-details";
 import { getQueryStaleTime } from "@/utils/get-query-stale-time";
 
 interface UseFetchPokemonCardDetailsProps {
@@ -13,6 +13,6 @@ export const useFetchPokemonCardDetails = ({
     queryKey: ["pokemon", "card", "details", { pokemonName }],
     queryFn: ({ signal }) => fetchPokemonCardDetails({ pokemonName, signal }),
     enabled: !!pokemonName,
-    staleTime: getQueryStaleTime('Infinity')
+    staleTime: getQueryStaleTime("Infinity"),
   });
 };

@@ -1,4 +1,4 @@
-import { http } from "..";
+import { http } from "../api";
 import type { PokeAPI } from "pokeapi-types";
 
 export const fetchPokemonCardDetails = ({

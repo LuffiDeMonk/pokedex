@@ -1,11 +1,12 @@
-import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
+import { useNavigate } from "react-router-dom";
 import { getPokemonImage } from "@/utils/get-pokemon-image";
 import { Card, CardDescription } from "@/components/ui/card";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import PokemonStatusBadge from "@/components/common/PokemonStatusBadge";
 import { getPokemonCardColor } from "@/utils/get-pokemon-card-background";
-import { useFetchPokemonCardDetails } from "@/api/query/use-fetch-pokemon-card-details";
-import { useNavigate } from "react-router-dom";
+import { useFetchPokemonCardDetails } from "@/query/use-fetch-pokemon-card-details";
 
 interface PokemonCardProps {
   pokemonName: string;
@@ -14,19 +15,18 @@ interface PokemonCardProps {
 export const PokemonCard = ({ pokemonName }: PokemonCardProps) => {
   const { data: pokemonCardData } = useFetchPokemonCardDetails({ pokemonName });
   const navigate = useNavigate();
-  const cardBackground = getPokemonCardColor({
-    pokemonType: pokemonCardData?.types[0].type.name,
-  });
   const handleCardClick = () => {
     if (typeof pokemonCardData === "undefined") return;
     navigate(`/pokemon/${pokemonCardData.name}`);
   };
   return (
     <Card
-      className={"h-40 p-0 cursor-pointer"}
-      style={{
-        background: cardBackground,
-      }}
+      className={cn(
+        "h-40 p-0 cursor-pointer",
+        getPokemonCardColor({
+          pokemonType: pokemonCardData?.types[0].type.name,
+        })
+      )}
       onClick={handleCardClick}>
       <CardDescription className="relative overflow-hidden h-full px-4 py-2">
         <div className="space-y-6">
@@ -35,12 +35,7 @@ export const PokemonCard = ({ pokemonName }: PokemonCardProps) => {
           </p>
           <div className="flex flex-col gap-1">
             {pokemonCardData?.types.map((type, index) => (
-              <Badge
-                key={index}
-                className="rounded-full max-w-20 bg-gradient-to-b from-white/60 to-white/30 text-black text-sm flex justify-center capitalize text-center px-2 py-1 border-0"
-                variant="outline">
-                {type.type.name}
-              </Badge>
+              <PokemonStatusBadge type={type.type.name} key={index} />
             ))}
           </div>
         </div>

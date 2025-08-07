@@ -1,4 +1,4 @@
-import { useFetchPokemons } from "@/api/query/use-fetch-pokemons";
+import { useFetchPokemons } from "@/query/use-fetch-pokemons";
 import { PokemonCard } from "./_components/PokemonCard";
 
 export default function Home() {

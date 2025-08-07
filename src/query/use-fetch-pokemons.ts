@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { fetchPokemon } from "./fetch-pokemon";
+import { fetchPokemon } from "../api-client/fetch-pokemon";
 import { getQueryStaleTime } from "@/utils/get-query-stale-time";
 
 export const useFetchPokemons = () => {

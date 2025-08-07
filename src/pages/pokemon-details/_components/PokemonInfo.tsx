@@ -12,16 +12,16 @@ export default function PokemonInfo() {
     });
     if(!pokemonAbilityData) return null;
   return (
-    <div className="w-full grid grid-cols-1 xl:grid-cols-3 gap-4 place-items-center xl:place-items-stretch px-12">
-        <PokemonAbility />
-        <LazyLoadImage 
-            src={getPokemonImage({pokemonId: pokemonAbilityData?.id})}
-            width={453}
-            height={453}
-            alt="test"
-            className="xl:basis-1/3 shrink-0"
-        />
-        <PokemonStats />
+    <div className="w-full grid grid-cols-1 xl:grid-cols-3 gap-4 place-items-center xl:place-items-stretch">
+      <PokemonAbility />
+      <LazyLoadImage
+        src={getPokemonImage({ pokemonId: String(pokemonAbilityData?.id) })}
+        width={453}
+        height={453}
+        alt="test"
+        className="basis-full xl:basis-1/3 shrink-0"
+      />
+      <PokemonStats />
     </div>
-  )
+  );
 }

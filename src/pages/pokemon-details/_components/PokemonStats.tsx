@@ -14,8 +14,8 @@ export default function PokemonStats() {
   return (
     <div className="flex w-full items-center justify-center">
       <div className="xl:basis-1/3 shrink-0 space-y-4">
-        {pokemonAbilityData?.stats?.map((stat) => (
-          <div className="flex gap-10 items-center">
+        {pokemonAbilityData?.stats?.map((stat, index) => (
+          <div className="flex gap-10 items-center" key={index}>
             <span className="w-40 font-medium text-gray-700 text-right text-nowrap capitalize">
               {formatPokemonStatusTitle(stat.stat.name)}
             </span>

@@ -9,7 +9,7 @@ export default function PokemonAbility() {
     pokemonName: pokemonName as string,
   });
   return (
-    <div className="flex items-center justify-center xl:basis-1/3 shrink-0">
+    <div className="flex items-center justify-center basis-full xl:basis-1/3 shrink-0">
       <div className="space-y-4">
         <div className="flex gap-10 items-start justify-normal">
           <span className="w-24 font-medium text-gray-700 text-right">ID</span>

@@ -1,5 +1,7 @@
 import { useFetchPokemonCardDetails } from "@/query/use-fetch-pokemon-card-details";
+import { useFetchPokemonEvolution } from "@/query/use-fetch-pokemon-evolution";
 import { useFetchPokemonSpecies } from "@/query/use-fetch-pokemon-species";
+import { getPokemonIdFromUrl } from "@/utils/get-pokemon-id-from-url";
 import { useParams } from "react-router-dom";
 
 export const useFetchPokemonDetails = () => {
@@ -15,11 +17,19 @@ export const useFetchPokemonDetails = () => {
       pokemonName: pokemonName as string,
     });
 
-  const isLoading = isPokemonDataLoading || isPokemonSpeciesDataLoading;
+  const {data: pokemonEvolutionData, isLoading: isPokemonEvolutionDataLoading} = useFetchPokemonEvolution({
+    pokemonId: getPokemonIdFromUrl(pokemonSpeciesData?.evolution_chain.url)
+  })
+
+  const isLoading =
+    isPokemonDataLoading ||
+    isPokemonSpeciesDataLoading ||
+    isPokemonEvolutionDataLoading;
 
   return {
     isLoading,
     pokemonData, 
-    pokemonSpeciesData
+    pokemonSpeciesData,
+    pokemonEvolutionData
   }
 };

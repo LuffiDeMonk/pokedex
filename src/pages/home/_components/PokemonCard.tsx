@@ -42,7 +42,7 @@ export const PokemonCard = ({ pokemonName }: PokemonCardProps) => {
         {pokemonCardData && (
           <figure className="size-24 absolute -bottom-1 right-0">
             <LazyLoadImage
-              src={getPokemonImage({ pokemonId: pokemonCardData.id })}
+              src={getPokemonImage({ pokemonId: String(pokemonCardData.id) })}
               alt={pokemonCardData.name}
               effect="blur"
               className="w-full object-cover"

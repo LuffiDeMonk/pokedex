@@ -6,7 +6,6 @@ export default function PokemonTitle() {
   const { pokemonData: pokemonStats, pokemonSpeciesData } =
     useFetchPokemonDetails();
 
-    console.log(pokemonStats, "test");
   return (
     <div>
       <div className="flex items-center justify-center flex-col space-y-3">

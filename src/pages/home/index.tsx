@@ -2,7 +2,7 @@ import { useFetchPokemons } from "@/query/use-fetch-pokemons";
 import { PokemonCard } from "./_components/PokemonCard";
 
 export default function Home() {
-  const { data: pokemonListdata } = useFetchPokemons();
+  const { data: pokemonListdata } = useFetchPokemons({limit: 50});
   if (!pokemonListdata) return null;
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 px-2 lg:px-4 xl:px-6">

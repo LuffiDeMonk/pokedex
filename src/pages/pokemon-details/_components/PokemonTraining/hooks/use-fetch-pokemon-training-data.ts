@@ -13,16 +13,16 @@ export const useFetchPokemonTrainingData = () => {
       pokemonName: pokemonName as string,
     });
 
-  const { data: pokemmonMoveDetails, isLoading: isPokemonMoveDetailsLoading } =
-    useFetchPokemonMoveDetails({
-      pokemonMoves:
-        pokemonBaseData?.moves as UseFetchPokemonMoveDetailsProps['pokemonMoves'],
-    });
+  // const { data: pokemmonMoveDetails, isLoading: isPokemonMoveDetailsLoading } =
+  //   useFetchPokemonMoveDetails({
+  //     pokemonMoves:
+  //       pokemonBaseData?.moves as UseFetchPokemonMoveDetailsProps['pokemonMoves'],
+  //   });
 
-  const isLoading = isPokemonBaseDataLoading || isPokemonMoveDetailsLoading;
+  const isLoading = isPokemonBaseDataLoading;
 
   return {
-    pokemmonMoveDetails,
+    // pokemmonMoveDetails,
     isLoading,
   };
 };

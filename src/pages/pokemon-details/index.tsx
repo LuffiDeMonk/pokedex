@@ -5,7 +5,7 @@ import PokemonTrainingData from './_components/PokemonTraining';
 import { useFetchPokemonDetails } from './hooks/use-fetch-pokemon-details';
 
 export default function PokemonDetails() {
-  const { pokemonData } = useFetchPokemonDetails();
+  const { pokemonData, pokemonSpeciesData } = useFetchPokemonDetails();
   const pokemonType = pokemonData?.types[0].type.name;
   return (
     <div className="w-full px-12 space-y-10">
@@ -13,7 +13,10 @@ export default function PokemonDetails() {
       <PokemonInfo />
       <PokemonEvolution pokemonType={pokemonType} />
       <div className="flex justify-between">
-        <PokemonTrainingData />
+        <PokemonTrainingData
+          pokemonData={pokemonData}
+          pokemonSpeciesData={pokemonSpeciesData}
+        />
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import { POKEMON_TYPES_COLORS } from "@/constants";
+import { POKEMON_TYPES_COLORS } from '@/constants';
 
 interface GetPokemonCardColorProps {
   pokemonType: string | undefined;

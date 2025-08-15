@@ -1,6 +1,6 @@
-import PokemonStatusBadge from "@/components/common/PokemonStatusBadge";
-import { getPokemonCardColor } from "@/utils/get-pokemon-card-background";
-import { useFetchPokemonDetails } from "../hooks/use-fetch-pokemon-details";
+import PokemonStatusBadge from '@/components/common/PokemonStatusBadge';
+import { getPokemonCardColor } from '@/utils/get-pokemon-card-background';
+import { useFetchPokemonDetails } from '../hooks/use-fetch-pokemon-details';
 
 export default function PokemonTitle() {
   const { pokemonData: pokemonStats, pokemonSpeciesData } =

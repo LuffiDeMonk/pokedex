@@ -1,8 +1,8 @@
-import PokemonEvolution from "./_components/PokemonEvolution";
-import PokemonInfo from "./_components/PokemonInfo";
-import PokemonTitle from "./_components/PokemonTitle";
-import PokemonTrainingData from "./_components/PokemonTraining";
-import { useFetchPokemonDetails } from "./hooks/use-fetch-pokemon-details";
+import PokemonEvolution from './_components/PokemonEvolution';
+import PokemonInfo from './_components/PokemonInfo';
+import PokemonTitle from './_components/PokemonTitle';
+import PokemonTrainingData from './_components/PokemonTraining';
+import { useFetchPokemonDetails } from './hooks/use-fetch-pokemon-details';
 
 export default function PokemonDetails() {
   const { pokemonData } = useFetchPokemonDetails();

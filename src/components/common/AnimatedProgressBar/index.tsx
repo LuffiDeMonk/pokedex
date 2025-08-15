@@ -1,6 +1,6 @@
-import React from "react";
-import { Progress } from "@/components/ui/progress";
-import { useAnimatedProgress } from "./use-animated-progress";
+import React from 'react';
+import { Progress } from '@/components/ui/progress';
+import { useAnimatedProgress } from './use-animated-progress';
 
 interface AnimatedProgressBarProps
   extends React.ComponentProps<typeof Progress> {

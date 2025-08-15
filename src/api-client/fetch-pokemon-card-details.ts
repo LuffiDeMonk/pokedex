@@ -1,5 +1,5 @@
-import { http } from "../api";
-import type { PokeAPI } from "pokeapi-types";
+import { http } from '../api';
+import type { PokeAPI } from 'pokeapi-types';
 
 export const fetchPokemonCardDetails = ({
   pokemonName,
@@ -9,7 +9,7 @@ export const fetchPokemonCardDetails = ({
   signal?: AbortSignal;
 }) => {
   return http<PokeAPI.Pokemon>({
-    method: "GET",
+    method: 'GET',
     url: `/pokemon/${pokemonName}`,
     signal,
   });

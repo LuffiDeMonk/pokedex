@@ -2,13 +2,13 @@
 export default function getTimeInMs(
   time: number,
   duration:
-    | "seconds"
-    | "minutes"
-    | "hours"
-    | "days"
-    | "weeks"
-    | "months"
-    | "years"
+    | 'seconds'
+    | 'minutes'
+    | 'hours'
+    | 'days'
+    | 'weeks'
+    | 'months'
+    | 'years'
 ) {
   const timeSpanInMs = {
     second: 1000,

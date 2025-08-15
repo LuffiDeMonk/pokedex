@@ -1,5 +1,5 @@
-import { http } from "@/api";
-import type { PokeAPI } from "pokeapi-types";
+import { http } from '@/api';
+import type { PokeAPI } from 'pokeapi-types';
 
 interface FetchPokemonMovesProps {
   moveId: string;
@@ -11,7 +11,7 @@ export const fetchPokemonMoveDetails = ({
   signal,
 }: FetchPokemonMovesProps) => {
   return http<PokeAPI.Move>({
-    method: "GET",
+    method: 'GET',
     url: `/move/${moveId}`,
     signal,
   });

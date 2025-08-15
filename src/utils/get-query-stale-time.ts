@@ -1,11 +1,11 @@
-import getTimeInMs from "./get-time-in-ms";
+import getTimeInMs from './get-time-in-ms';
 
 const staleTimeDuration = {
   Infinity: Infinity,
-  "10s": getTimeInMs(10, "seconds"),
-  "30s": getTimeInMs(30, "seconds"),
-  "1m": getTimeInMs(1, "minutes"),
-  "5m": getTimeInMs(5, "minutes"),
+  '10s': getTimeInMs(10, 'seconds'),
+  '30s': getTimeInMs(30, 'seconds'),
+  '1m': getTimeInMs(1, 'minutes'),
+  '5m': getTimeInMs(5, 'minutes'),
 };
 
 /**

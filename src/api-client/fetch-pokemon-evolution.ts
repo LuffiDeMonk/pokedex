@@ -1,5 +1,5 @@
-import { http } from "@/api";
-import type { PokeAPI } from "pokeapi-types";
+import { http } from '@/api';
+import type { PokeAPI } from 'pokeapi-types';
 
 interface FetchPokemonEvolutionProps {
   pokemonId: string;
@@ -11,7 +11,7 @@ export const fetchPokemonEvolution = ({
   signal,
 }: FetchPokemonEvolutionProps) => {
   return http<PokeAPI.EvolutionChain>({
-    method: "GET",
+    method: 'GET',
     url: `/evolution-chain/${pokemonId}`,
     signal,
   });

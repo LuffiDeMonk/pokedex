@@ -1,5 +1,5 @@
-import { http } from "@/api";
-import type { PokeAPI } from "pokeapi-types";
+import { http } from '@/api';
+import type { PokeAPI } from 'pokeapi-types';
 
 export const fetchPokemon = async ({
   limit = 20,
@@ -10,7 +10,7 @@ export const fetchPokemon = async ({
 }) => {
   return await http<PokeAPI.NamedAPIResourceList>({
     url: `/pokemon?limit=${limit}`,
-    method: "GET",
+    method: 'GET',
     signal,
   });
 };

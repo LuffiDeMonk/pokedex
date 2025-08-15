@@ -1,11 +1,11 @@
-import type { PokeAPI } from "pokeapi-types";
-import { useQueries, type QueryFunctionContext } from "@tanstack/react-query";
-import { getQueryStaleTime } from "@/utils/get-query-stale-time";
-import { fetchPokemonMoveDetails } from "@/api-client/fetch-pokemon-move-details";
-import { getPokemonIdFromUrl } from "@/utils/get-pokemon-id-from-url";
+import type { PokeAPI } from 'pokeapi-types';
+import { useQueries, type QueryFunctionContext } from '@tanstack/react-query';
+import { getQueryStaleTime } from '@/utils/get-query-stale-time';
+import { fetchPokemonMoveDetails } from '@/api-client/fetch-pokemon-move-details';
+import { getPokemonIdFromUrl } from '@/utils/get-pokemon-id-from-url';
 
 export interface UseFetchPokemonMoveDetailsProps {
-  pokemonMoves: PokeAPI.Pokemon["moves"];
+  pokemonMoves: PokeAPI.Pokemon['moves'];
 }
 
 export const useFetchPokemonMoveDetails = ({
@@ -14,9 +14,9 @@ export const useFetchPokemonMoveDetails = ({
   return useQueries({
     queries: (pokemonMoves ?? []).map((move) => ({
       queryKey: [
-        "pokemon",
-        "move",
-        "details",
+        'pokemon',
+        'move',
+        'details',
         { moveId: getPokemonIdFromUrl(move.move.url) },
       ],
       queryFn: ({ signal }: QueryFunctionContext) =>
@@ -26,8 +26,8 @@ export const useFetchPokemonMoveDetails = ({
         }),
       enabled:
         !!pokemonMoves &&
-        typeof getPokemonIdFromUrl(move.move.url) === "string",
-      staleTime: getQueryStaleTime("Infinity"),
+        typeof getPokemonIdFromUrl(move.move.url) === 'string',
+      staleTime: getQueryStaleTime('Infinity'),
     })),
     combine: (results) => ({
       data: results.map((result) => result.data).filter(Boolean),

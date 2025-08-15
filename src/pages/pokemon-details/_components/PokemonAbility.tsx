@@ -1,16 +1,16 @@
+import { useParams } from "react-router-dom";
+import { queryClient } from "@/utils/query-client";
 import PokemonStatusBadge from "@/components/common/PokemonStatusBadge";
 import { getPokemonCardColor } from "@/utils/get-pokemon-card-background";
 import { useFetchPokemonDetails } from "../hooks/use-fetch-pokemon-details";
-import { queryClient } from "@/utils/query-client";
 import { fetchPokemonCardDetails } from "@/api-client/fetch-pokemon-card-details";
-import { useParams } from "react-router-dom";
 
 export default function PokemonAbility() {
   const { pokemonData: pokemonAbilityData, pokemonSpeciesData } =
     useFetchPokemonDetails();
   const { pokemonName: basePokemon } = useParams();
   const handlebadgeClick = async ({ pokemonName }: { pokemonName: string }) => {
-    if(pokemonSpeciesData?.varieties.length === 1) return;
+    if (pokemonSpeciesData?.varieties.length === 1) return;
     const selectedPokemonForm = await queryClient.fetchQuery({
       queryKey: ["pokemon", "card", "details", { pokemonName }],
       queryFn: () => fetchPokemonCardDetails({ pokemonName }),

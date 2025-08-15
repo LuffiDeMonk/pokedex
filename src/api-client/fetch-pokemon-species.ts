@@ -1,5 +1,5 @@
-import { http } from "@/api";
-import type { PokeAPI } from "pokeapi-types";
+import { http } from '@/api';
+import type { PokeAPI } from 'pokeapi-types';
 
 interface FetchPokemonSpeciesProps {
   pokemonName: string;
@@ -10,7 +10,7 @@ export const fetchPokemonSpecies = async ({
   signal,
 }: FetchPokemonSpeciesProps) => {
   return await http<PokeAPI.PokemonSpecies>({
-    method: "GET",
+    method: 'GET',
     url: `/pokemon-species/${pokemonName}`,
     signal,
   });

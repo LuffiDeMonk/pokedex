@@ -1,5 +1,5 @@
-import { Badge } from "../ui/badge";
-import { cn } from "@/lib/utils";
+import { Badge } from '../ui/badge';
+import { cn } from '@/lib/utils';
 interface PokemonStatusBadgeProps {
   type: string;
   className?: string;
@@ -14,10 +14,11 @@ export default function PokemonStatusBadge({
   return (
     <Badge
       className={cn(
-        "rounded-full max-w-20 bg-gradient-to-b from-white/60 to-white/30 text-black text-sm flex justify-center capitalize text-center px-2 py-1 border-0",
+        'rounded-full max-w-20 bg-gradient-to-b from-white/60 to-white/30 text-black text-sm flex justify-center capitalize text-center px-2 py-1 border-0',
         className
       )}
-      variant="outline">
+      variant="outline"
+    >
       {type}
     </Badge>
   );

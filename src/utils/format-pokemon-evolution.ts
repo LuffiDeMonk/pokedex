@@ -1,9 +1,9 @@
-import type { PokeAPI } from "pokeapi-types";
-import { getPokemonIdFromUrl } from "./get-pokemon-id-from-url";
-import type { formattedPokemonEvolutionData } from "@/modals";
+import type { PokeAPI } from 'pokeapi-types';
+import { getPokemonIdFromUrl } from './get-pokemon-id-from-url';
+import type { formattedPokemonEvolutionData } from '@/modals';
 
 export const formatPokemonEvolution = (
-  data: PokeAPI.EvolutionChain["chain"],
+  data: PokeAPI.EvolutionChain['chain'],
   formattedPokemonEvolutionData: formattedPokemonEvolutionData[]
 ) => {
   const formattedData: formattedPokemonEvolutionData = {

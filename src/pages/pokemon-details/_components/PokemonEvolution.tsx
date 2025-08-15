@@ -1,11 +1,12 @@
 import React from "react";
 import { cn } from "@/lib/utils";
-import { getPokemonCardColor } from "@/utils/get-pokemon-card-background";
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import { getPokemonImage } from "@/utils/get-pokemon-image";
 import { ArrowRightIcon } from "lucide-react";
-import { useFetchPokemonEvolutionData } from "../hooks/use-fetch-pokemon-evolution-data";
 import { Skeleton } from "@/components/ui/skeleton";
+import { getPokemonImage } from "@/utils/get-pokemon-image";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import { getPokemonCardColor } from "@/utils/get-pokemon-card-background";
+
+import { useFetchPokemonEvolutionData } from "../hooks/use-fetch-pokemon-evolution-data";
 
 interface PokemonEvolutionProps {
   pokemonType?: string;

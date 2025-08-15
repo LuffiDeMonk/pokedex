@@ -1,8 +1,9 @@
-import AnimatedProgressBar from "@/components/common/AnimatedProgressBar";
 import { cn } from "@/lib/utils";
-import { useFetchPokemonCardDetails } from "@/query/use-fetch-pokemon-card-details";
-import { getPokemonCardColor } from "@/utils/get-pokemon-card-background";
 import { useParams } from "react-router-dom";
+import AnimatedProgressBar from "@/components/common/AnimatedProgressBar";
+import { getPokemonCardColor } from "@/utils/get-pokemon-card-background";
+import { useFetchPokemonCardDetails } from "@/query/use-fetch-pokemon-card-details";
+
 import { formatPokemonStatusTitle } from "../utils/formatPokemonStatusTitle";
 
 export default function PokemonStats() {

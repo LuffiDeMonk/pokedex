@@ -4,6 +4,8 @@ import PokemonStatusBadge from "@/components/common/PokemonStatusBadge";
 import { getPokemonCardColor } from "@/utils/get-pokemon-card-background";
 import { useFetchPokemonDetails } from "../hooks/use-fetch-pokemon-details";
 import { fetchPokemonCardDetails } from "@/api-client/fetch-pokemon-card-details";
+import { formatPokemonWeight } from "@/utils/format-pokemon-weight";
+import { formatPokemonHeight } from "@/utils/format-pokemon-height";
 
 export default function PokemonAbility() {
   const { pokemonData: pokemonAbilityData, pokemonSpeciesData } =
@@ -37,7 +39,7 @@ export default function PokemonAbility() {
             Height
           </span>
           <div className="flex flex-wrap gap-2 w-full">
-            {pokemonAbilityData?.height}
+            {formatPokemonHeight(pokemonAbilityData?.height)}
           </div>
         </div>
         <div className="flex gap-10 items-start">
@@ -45,7 +47,7 @@ export default function PokemonAbility() {
             Weight
           </span>
           <div className="flex flex-wrap gap-2 w-full">
-            {pokemonAbilityData?.weight}
+            {formatPokemonWeight(pokemonAbilityData?.weight)}
           </div>
         </div>
         <div className="flex gap-10 items-start">

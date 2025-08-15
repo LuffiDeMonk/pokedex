@@ -1,6 +1,6 @@
 import { fetchPokemonEvolution } from '@/api-client/fetch-pokemon-evolution';
 import type { formattedPokemonEvolutionData } from '@/modals';
-import { formatPokemonEvolution } from '@/utils/format-pokemon-evolution';
+import { formatPokemonEvolution } from "@/pages/pokemon-details/utils/format-pokemon-evolution";
 import { useQuery } from '@tanstack/react-query';
 
 interface UseFetchPokemonEvolutionProps {

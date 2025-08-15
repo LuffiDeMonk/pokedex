@@ -4,8 +4,8 @@ import PokemonStatusBadge from "@/components/common/PokemonStatusBadge";
 import { getPokemonCardColor } from "@/utils/get-pokemon-card-background";
 import { useFetchPokemonDetails } from "../hooks/use-fetch-pokemon-details";
 import { fetchPokemonCardDetails } from "@/api-client/fetch-pokemon-card-details";
-import { formatPokemonWeight } from "@/utils/format-pokemon-weight";
-import { formatPokemonHeight } from "@/utils/format-pokemon-height";
+import { formatPokemonWeight } from "@/pages/pokemon-details/utils/format-pokemon-weight";
+import { formatPokemonHeight } from "@/pages/pokemon-details/utils/format-pokemon-height";
 
 export default function PokemonAbility() {
   const { pokemonData: pokemonAbilityData, pokemonSpeciesData } =

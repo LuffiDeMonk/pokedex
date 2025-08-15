@@ -2,6 +2,7 @@ import PokemonEvolution from './_components/PokemonEvolution';
 import PokemonInfo from './_components/PokemonInfo';
 import PokemonTitle from './_components/PokemonTitle';
 import PokemonTrainingData from './_components/PokemonTraining';
+import PokemonBreedingInformation from "./_components/PokemonTraining/PokemonBreedingInformation";
 import { useFetchPokemonDetails } from './hooks/use-fetch-pokemon-details';
 
 export default function PokemonDetails() {
@@ -17,6 +18,7 @@ export default function PokemonDetails() {
           pokemonData={pokemonData}
           pokemonSpeciesData={pokemonSpeciesData}
         />
+        <PokemonBreedingInformation pokemonSpeciesData={pokemonSpeciesData}/>
       </div>
     </div>
   );

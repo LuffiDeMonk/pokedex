@@ -1,6 +1,6 @@
-import { formatPokemonCaptureRate } from "@/utils/fomat-pokemon-capture-rate";
-import { formatExperiencePoints } from "@/utils/format-experience-points";
-import { formatFriendshipStat } from "@/utils/format-friendship-stat";
+import { formatPokemonCaptureRate } from "@/pages/pokemon-details/utils/fomat-pokemon-capture-rate";
+import { formatExperiencePoints } from "@/pages/pokemon-details/utils/format-experience-points";
+import { formatFriendshipStat } from "@/pages/pokemon-details/utils/format-friendship-stat";
 import type { PokeAPI } from "pokeapi-types";
 
 interface PokemonTrainingDataProps {

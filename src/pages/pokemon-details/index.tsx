@@ -13,12 +13,12 @@ export default function PokemonDetails() {
       <PokemonTitle />
       <PokemonInfo />
       <PokemonEvolution pokemonType={pokemonType} />
-      <div className="flex justify-between">
+      <div className="flex justify-between gap-2 flex-col xl:flex-row">
         <PokemonTrainingData
           pokemonData={pokemonData}
           pokemonSpeciesData={pokemonSpeciesData}
         />
-        <PokemonBreedingInformation pokemonSpeciesData={pokemonSpeciesData}/>
+        <PokemonBreedingInformation pokemonSpeciesData={pokemonSpeciesData} />
       </div>
     </div>
   );

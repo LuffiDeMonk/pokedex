@@ -9,6 +9,16 @@ import { formatPokemonHeight } from "../utils/format-pokemon-height";
 import PokemonStatusBadge from "@/components/common/PokemonStatusBadge";
 import { getPokemonCardColor } from "@/utils/get-pokemon-card-background";
 import { formatPokemonWeight } from "../utils/format-pokemon-weight";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 interface PokemonHeroSectionProps {
   pokemonDetails: PokeAPI.Pokemon | undefined;
@@ -94,11 +104,59 @@ export default function PokemonHeroSection({
                 <h1 className="text-5xl lg:text-6xl font-bold text-white capitalize mb-3 tracking-tight">
                   {pokemonDetails?.name}
                 </h1>
-                {pokemonSpeciesData?.genera?.map((type, index) => (
-                  <div key={index} className={`text-xl`}>
-                    {type.genus}
-                  </div>
-                ))}
+                <Dialog>
+                  <DialogTrigger>
+                    {pokemonSpeciesData?.genera?.map((type, index) => (
+                      <div key={index} className={`text-xl`}>
+                        {type.genus}
+                      </div>
+                    ))}
+                  </DialogTrigger>
+                  <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle className="capitalize text-xl font-normal">
+                        {pokemonDetails?.name}
+                      </DialogTitle>
+                      <PokemonStatusBadge
+                        type={"Pokédex Entries"}
+                        className={cn(
+                          "text-white font-normal max-w-full rounded-sm text-xs",
+                          getPokemonCardColor({
+                            pokemonType: pokemonDetails?.types[0].type.name,
+                          })
+                        )}
+                      />
+                    </DialogHeader>
+                    <DialogDescription>
+                      <div className="max-h-80 overflow-y-auto overflow-hidden px-4 space-y-4">
+                        {pokemonSpeciesData?.flavor_text_entries.map((text) => (
+                          <div
+                            key={text.flavor_text}
+                            className="flex flex-col justify-center items-center gap-1">
+                            <PokemonStatusBadge
+                              type={`Pokédex ${text.version.name}`}
+                              className={cn(
+                                "max-w-fit text-white text-lg font-medium rounded-sm",
+                                getPokemonCardColor({
+                                  pokemonType:
+                                    pokemonDetails?.types[0].type.name,
+                                })
+                              )}
+                            />
+                            <p className="text-sm text-center">
+                              {text.flavor_text}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                    </DialogDescription>
+                    <DialogFooter>
+                      <DialogClose>
+                        <Button>Close</Button>
+                      </DialogClose>
+                    </DialogFooter>
+                  </DialogContent>
+                </Dialog>
               </div>
 
               {/* Type Badges */}

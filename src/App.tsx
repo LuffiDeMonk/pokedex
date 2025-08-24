@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Layout from "./pages/layout";
 import { Route, Routes } from "react-router-dom";
 import { queryClient } from "./utils/query-client";
@@ -13,10 +13,25 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <Routes>
         <Route element={<Layout />}>
-          <Route path="/" element={<Home />} />
-          <Route path="pokemon/:pokemonName" element={<PokemonDetails />} />
+          <Route
+            path="/"
+            element={
+              <Suspense fallback={<div>Loading Home...</div>}>
+                <Home />
+              </Suspense>
+            }
+          />
+          <Route
+            path="pokemon/:pokemonName"
+            element={
+              <Suspense fallback={<div>Loading Pokémon...</div>}>
+                <PokemonDetails />
+              </Suspense>
+            }
+          />
         </Route>
       </Routes>
+
       <ReactQueryDevtools initialIsOpen={false} buttonPosition="bottom-left" />
     </QueryClientProvider>
   );

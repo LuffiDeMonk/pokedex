@@ -8,18 +8,25 @@ import { Button } from "@/components/ui/button";
 import { formatPokemonStatusTitle } from "@/pages/pokemon-details/utils/formatPokemonStatusTitle";
 import { Image } from "@/components/common/Image";
 import AppIcon from "@/components/common/AppIcon";
+import { PokemonCardSkeleton } from "./PokemonCardSkeleton";
 
 interface PokemonCardProps {
   pokemonName: string;
 }
 
 export const PokemonCard = ({ pokemonName }: PokemonCardProps) => {
-  const { data: pokemon } = useFetchPokemonCardDetails({ pokemonName });
+  const { data: pokemon, isLoading: isPokemonLoading } =
+    useFetchPokemonCardDetails({ pokemonName });
   const navigate = useNavigate();
   const handleCardClick = () => {
     if (typeof pokemon === "undefined") return;
     navigate(`/pokemon/${pokemon.name}`);
   };
+
+  if (isPokemonLoading) {
+    return <PokemonCardSkeleton />;
+  }
+
   return (
     <div
       className="bg-card rounded-xl border border-border shadow-elevation-1 hover:shadow-elevation-2 transition-all duration-300 cursor-pointer group hover:scale-102 overflow-hidden"
@@ -71,20 +78,16 @@ export const PokemonCard = ({ pokemonName }: PokemonCardProps) => {
 
         {/* Stats Preview */}
         <div className="flex items-center justify-between gap-2 text-xs text-muted-foreground">
-          {pokemon?.stats
-            .slice()
-            .reverse()
-            .slice(0, 3)
-            .map((stat) => (
-              <div className="text-center" key={stat.stat.name}>
-                <div className="font-medium text-foreground">
-                  {stat.base_stat}
-                </div>
-                <div className="text-xs capitalize">
-                  {formatPokemonStatusTitle(stat.stat.name)}
-                </div>
+          {pokemon?.stats.slice(0, 3).map((stat) => (
+            <div className="text-center" key={stat.stat.name}>
+              <div className="font-medium text-foreground">
+                {stat.base_stat}
               </div>
-            ))}
+              <div className="text-xs capitalize">
+                {formatPokemonStatusTitle(stat.stat.name)}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>

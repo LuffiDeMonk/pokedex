@@ -1,5 +1,3 @@
-"use client";
-
 import { Skeleton } from "@/components/ui/skeleton";
 
 export const PokemonCardSkeleton = () => {
@@ -7,7 +5,7 @@ export const PokemonCardSkeleton = () => {
     <div className="bg-card rounded-xl border border-border shadow-elevation-1 overflow-hidden animate-pulse">
       {/* Image placeholder */}
       <div className="relative bg-muted p-4 aspect-square flex items-center justify-center">
-        <Skeleton className="w-24 h-24" />
+        <Skeleton className="size-full" />
       </div>
 
       {/* Info placeholder */}

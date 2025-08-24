@@ -1,8 +1,8 @@
-import { useFetchPokemonCardDetails } from '@/query/use-fetch-pokemon-card-details';
-import { useFetchPokemonEvolution } from '@/query/use-fetch-pokemon-evolution';
-import { useFetchPokemonSpecies } from '@/query/use-fetch-pokemon-species';
-import { getPokemonIdFromUrl } from '@/utils/get-pokemon-id-from-url';
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
+import { useFetchPokemonSpecies } from "@/query/use-fetch-pokemon-species";
+import { useFetchPokemonCardDetails } from "@/query/use-fetch-pokemon-card-details";
+
+import { useFetchPokemonTypes } from "@/query/use-fetch-pokemon-types";
 
 export const useFetchPokemonDetails = () => {
   const { pokemonName } = useParams();
@@ -17,22 +17,20 @@ export const useFetchPokemonDetails = () => {
       pokemonName: pokemonName as string,
     });
 
-  const {
-    data: pokemonEvolutionData,
-    isLoading: isPokemonEvolutionDataLoading,
-  } = useFetchPokemonEvolution({
-    pokemonId: getPokemonIdFromUrl(pokemonSpeciesData?.evolution_chain.url),
-  });
+  const { data: pokemonTypeData, isLoading: isPokemonTypeDataLoading } =
+    useFetchPokemonTypes({
+      types: pokemonData?.types.map((type) => type.type.name),
+    });
 
   const isLoading =
     isPokemonDataLoading ||
     isPokemonSpeciesDataLoading ||
-    isPokemonEvolutionDataLoading;
+    isPokemonTypeDataLoading;
 
   return {
     isLoading,
     pokemonData,
     pokemonSpeciesData,
-    pokemonEvolutionData,
+    pokemonTypeData,
   };
 };

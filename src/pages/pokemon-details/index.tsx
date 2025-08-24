@@ -1,25 +1,22 @@
-import PokemonEvolution from './_components/PokemonEvolution';
-import PokemonInfo from './_components/PokemonInfo';
-import PokemonTitle from './_components/PokemonTitle';
-import PokemonTrainingData from './_components/PokemonTraining';
-import PokemonBreedingInformation from "./_components/PokemonTraining/PokemonBreedingInformation";
-import { useFetchPokemonDetails } from './hooks/use-fetch-pokemon-details';
+import PokemonHeroSection from "./_components/PokemonHeroSection";
+import { useFetchPokemonDetails } from "./hooks/use-fetch-pokemon-details";
+import { PokemonTabs } from "./_components/PokemonTabs";
 
 export default function PokemonDetails() {
-  const { pokemonData, pokemonSpeciesData } = useFetchPokemonDetails();
-  const pokemonType = pokemonData?.types[0].type.name;
+  const { pokemonData, pokemonSpeciesData, isLoading } =
+    useFetchPokemonDetails();
+
+  if (isLoading) {
+    return <>Loading...</>;
+  }
+
   return (
-    <div className="w-full px-12 space-y-10">
-      <PokemonTitle />
-      <PokemonInfo />
-      <PokemonEvolution pokemonType={pokemonType} />
-      <div className="flex justify-between gap-2 flex-col xl:flex-row">
-        <PokemonTrainingData
-          pokemonData={pokemonData}
-          pokemonSpeciesData={pokemonSpeciesData}
-        />
-        <PokemonBreedingInformation pokemonSpeciesData={pokemonSpeciesData} />
-      </div>
+    <div>
+      <PokemonHeroSection
+        pokemonDetails={pokemonData}
+        pokemonSpeciesData={pokemonSpeciesData}
+      />
+      <PokemonTabs pokemonData={pokemonData} />
     </div>
   );
 }

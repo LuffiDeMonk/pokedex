@@ -1,36 +1,76 @@
-import { cn } from "@/lib/utils";
-import { useParams } from "react-router-dom";
-import AnimatedProgressBar from "@/components/common/AnimatedProgressBar";
-import { getPokemonCardColor } from "@/utils/get-pokemon-card-background";
-import { useFetchPokemonCardDetails } from "@/query/use-fetch-pokemon-card-details";
+import AppIcon from "@/components/common/AppIcon";
+import type { PokeAPI } from "pokeapi-types";
+import PokemonStatCard from "./PokemonStatCard";
 
-import { formatPokemonStatusTitle } from "../utils/formatPokemonStatusTitle";
+interface PokemonStatsProps {
+  pokemonDetails: PokeAPI.Pokemon | undefined;
+}
 
-export default function PokemonStats() {
-  const { pokemonName } = useParams();
-  const { data: pokemonAbilityData } = useFetchPokemonCardDetails({
-    pokemonName: pokemonName as string,
-  });
-
+export default function PokemonStats({ pokemonDetails }: PokemonStatsProps) {
   return (
-    <div className="flex w-full items-center justify-center">
-      <div className="xl:basis-1/3 shrink-0 space-y-4">
-        {pokemonAbilityData?.stats?.map((stat, index) => (
-          <div className="flex gap-10 items-center" key={index}>
-            <span className="w-40 font-medium text-gray-700 text-right text-nowrap capitalize">
-              {formatPokemonStatusTitle(stat.stat.name)}
-            </span>
-            <div className="flex flex-wrap gap-2 w-full">
-              <AnimatedProgressBar
-                value={stat.base_stat > 100 ? 100 : stat.base_stat}
-                className={cn(`h-4 w-64`)}
-                indicatorClassNames={`${getPokemonCardColor({
-                  pokemonType: pokemonAbilityData?.types[0].type.name,
-                })}`}
-              />
-            </div>
+    <div className="space-y-6">
+      <div>
+        <h3 className="text-lg font-semibold text-foreground mb-4 flex items-center">
+          <AppIcon name="zap" size={20} className="mr-2" />
+          Pokemon Abilities
+        </h3>
+
+        <div className="space-y-4">
+          {pokemonDetails?.abilities?.map((pokemonAbility) => (
+            <PokemonStatCard
+              pokemonAbility={pokemonAbility}
+              key={pokemonAbility.ability.name}
+            />
+          ))}
+        </div>
+      </div>
+      {/* Ability Tips */}
+      <div className="bg-gradient-to-r from-accent/10 to-warning/10 p-6 rounded-lg border border-border">
+        <h4 className="text-lg font-semibold text-foreground mb-3 flex items-center">
+          <AppIcon name="lightbulb" size={20} className="mr-2" />
+          Ability Tips
+        </h4>
+
+        <div className="space-y-3 text-sm text-muted-foreground">
+          <div className="flex items-start space-x-2">
+            <AppIcon
+              name="check-check"
+              size={16}
+              className="text-success mt-0.5 flex-shrink-0"
+            />
+            <p>
+              <strong className="text-foreground">Standard Abilities:</strong>{" "}
+              Every Pokemon of this species can have these abilities. The
+              specific ability is determined when the Pokemon is encountered.
+            </p>
           </div>
-        ))}
+
+          <div className="flex items-start space-x-2">
+            <AppIcon
+              name="star"
+              size={16}
+              className="text-secondary mt-0.5 flex-shrink-0"
+            />
+            <p>
+              <strong className="text-foreground">Hidden Abilities:</strong>{" "}
+              These rare abilities can only be obtained through special methods
+              like raids, breeding, or special events.
+            </p>
+          </div>
+
+          <div className="flex items-start space-x-2">
+            <AppIcon
+              name="zap"
+              size={16}
+              className="text-primary mt-0.5 flex-shrink-0"
+            />
+            <p>
+              <strong className="text-foreground">Battle Impact:</strong>{" "}
+              Abilities can significantly affect battle strategy and Pokemon
+              performance in different situations.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );

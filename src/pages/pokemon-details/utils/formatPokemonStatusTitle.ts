@@ -1,9 +1,9 @@
 export const formatPokemonStatusTitle = (title: string) => {
   switch (title) {
     case 'special-attack':
-      return 'Sp. Attack';
+      return "Special Attack";
     case 'special-defense':
-      return 'Sp. Defense';
+      return "Special Defense";
     case 'hp':
       return 'HP';
     default:

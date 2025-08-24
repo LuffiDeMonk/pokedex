@@ -20,6 +20,7 @@ export const PokemonTabs = ({ pokemonData }: PokemonTabsProps) => {
       <TabsList className="flex items-center justify-start gap-2 px-10 bg-white">
         {POKEMON_TABS_TRIGGER_LIST.map((trigger) => (
           <TabsTrigger
+            key={trigger.value}
             value={trigger.value}
             className="px-6 gap-2"
             variant={pokemonBaseType}>

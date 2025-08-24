@@ -72,6 +72,7 @@ export const PokemonCard = ({ pokemonName }: PokemonCardProps) => {
         {/* Stats Preview */}
         <div className="flex items-center justify-between gap-2 text-xs text-muted-foreground">
           {pokemon?.stats
+            .slice()
             .reverse()
             .slice(0, 3)
             .map((stat) => (

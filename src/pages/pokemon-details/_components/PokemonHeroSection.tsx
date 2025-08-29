@@ -21,6 +21,8 @@ import { useStore } from "@/store";
 import { useNavigate } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
 import { getPokemonVariant } from "@/utils/get-pokemon-variant";
+import { useToast } from "@/hooks/use-toast";
+import { MAX_POKEMON_COMPARISION_CARD_COUNT } from "@/constants";
 
 interface PokemonHeroSectionProps {
   pokemonDetails: PokeAPI.Pokemon | undefined;
@@ -31,8 +33,9 @@ export default function PokemonHeroSection({
   pokemonDetails,
   pokemonSpeciesData,
 }: PokemonHeroSectionProps) {
-  const addPokemon = useStore((state) => state.addPokemon);
+  const { addPokemon, selectedPokemon } = useStore();
   const navigate = useNavigate();
+  const { toast } = useToast();
   const POKEMON_STATS: Array<{
     label: string;
     value: string;
@@ -55,8 +58,19 @@ export default function PokemonHeroSection({
     },
   ];
 
+  const isPokemonAddedForComparision = !!selectedPokemon.find(
+    (pokemon) => pokemon.id === pokemonDetails?.id
+  );
   const addPokemonToCompare = () => {
     if (!pokemonDetails) return null;
+    if (selectedPokemon.length === MAX_POKEMON_COMPARISION_CARD_COUNT) {
+      toast({
+        title: "Max pokemon added",
+        description: `Only ${MAX_POKEMON_COMPARISION_CARD_COUNT} pokemons can be added at a time`,
+        variant: "destructive",
+      });
+      return;
+    }
     addPokemon(pokemonDetails);
     navigate("/pokemon/compare-pokemon");
   };
@@ -162,12 +176,10 @@ export default function PokemonHeroSection({
                   </DialogContent>
                 </Dialog>
               </div>
-
-              {/* Type Badges */}
               <div className="flex flex-wrap justify-center lg:justify-start gap-3">
                 {pokemonDetails?.types?.map((type) => (
                   <Badge
-                    className="capitalize"
+                    className="capitalize font-normal"
                     variant={getPokemonVariant(type.type.name)}
                     key={type.type.name}>
                     {type.type.name}
@@ -176,7 +188,6 @@ export default function PokemonHeroSection({
               </div>
             </div>
 
-            {/* Stats Grid */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
               {POKEMON_STATS?.map((stat, index) => (
                 <div
@@ -210,9 +221,12 @@ export default function PokemonHeroSection({
               <Button
                 variant="default"
                 className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 hover:scale-105 transition-all duration-200 px-6 py-3 rounded-2xl font-medium shadow-lg border-0"
-                onClick={addPokemonToCompare}>
+                onClick={addPokemonToCompare}
+                disabled={isPokemonAddedForComparision}>
                 <AppIcon name="git-compare" className="size-4" />
-                Compare
+                {isPokemonAddedForComparision
+                  ? "Added for comparision"
+                  : "Compare"}
               </Button>
             </div>
           </div>

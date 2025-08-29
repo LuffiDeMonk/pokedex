@@ -127,8 +127,8 @@ export default function PokemonHeroSection({
                         )}
                       />
                     </DialogHeader>
-                    <DialogDescription>
-                      <div className="max-h-80 overflow-y-auto overflow-hidden px-4 space-y-4">
+                    <DialogDescription className="p-0 px-4">
+                      <div className="max-h-80 overflow-y-auto overflow-hidden space-y-4 hide-scrollbar">
                         {pokemonSpeciesData?.flavor_text_entries.map((text) => (
                           <div
                             key={text.flavor_text}

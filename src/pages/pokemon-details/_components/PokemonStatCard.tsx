@@ -5,13 +5,18 @@ import { getAbilityIcon } from "../utils/get-ability-icon";
 import { Card, CardDescription } from "@/components/ui/card";
 import { getPokemonIdFromUrl } from "@/utils/get-pokemon-id-from-url";
 import { useFetchPokemonAbilityDetails } from "@/query/use-fetch-pokemon-ability-details";
+import { cn } from "@/lib/utils";
 
 interface PokemonStatCardProps {
   pokemonAbility: PokeAPI.PokemonAbility;
+  className?: string;
+  onClick?: (ability: PokeAPI.Ability) => void;
 }
 
 export default function PokemonStatCard({
   pokemonAbility,
+  onClick,
+  className,
 }: PokemonStatCardProps) {
   const { pokemonName } = useParams();
   const { data: abilityData, isLoading: isAbilityDataLoading } =
@@ -44,7 +49,12 @@ export default function PokemonStatCard({
     (ability) => ability.pokemon.name === pokemonName
   )?.is_hidden;
   return (
-    <Card className="p-6 rounded-lg shadow-elevation-1 border border-border hover:shadow-elevation-2 transition-shadow duration-200">
+    <Card
+      className={cn(
+        "p-6 w-full rounded-lg shadow-elevation-1 border border-border hover:shadow-elevation-2 transition-shadow duration-200",
+        className
+      )}
+      onClick={() => onClick?.(abilityData)}>
       <CardDescription className="flex items-start space-x-4">
         <div
           className={`p-3 rounded-lg ${isHiddenAbility ? "bg-neutral-500/10" : "bg-blue-500/10"} flex-shrink-0`}>
@@ -67,15 +77,13 @@ export default function PokemonStatCard({
             )}
           </div>
           {abilityData.effect_entries.map((item) => (
-            <p
-              key={item.short_effect}
-              className="text-muted-foreground leading-relaxed">
+            <p key={item.short_effect} className="text-muted-foreground">
               {item.short_effect}
             </p>
           ))}
 
           <div className="mt-3 flex items-center text-sm text-muted-foreground">
-            <AppIcon name="info" size={14} className="mr-1" />
+            <AppIcon name="info" size={14} className="mr-1 shrink-0" />
             <span>
               {isHiddenAbility
                 ? "This is a hidden ability that can only be obtained through special methods."

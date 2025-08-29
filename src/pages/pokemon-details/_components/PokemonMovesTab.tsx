@@ -26,6 +26,8 @@ import {
 } from "../constant/pokemon_move_filters";
 import type { FilterForm } from "../constant/form-schema";
 import PokemonMovesContainer from "./PokemonMovesContainer";
+import { Suspense } from "react";
+import PokemonMoveCardSkeleton from "./PokemonMoveCardSkeleton";
 
 interface PokemonMovesTabProps {
   moves: PokeAPI.PokemonMove[] | undefined;
@@ -169,7 +171,9 @@ export default function PokemonMovesTab({ moves }: PokemonMovesTabProps) {
           </div>
         </CardContent>
       </Card>
-      <PokemonMovesContainer moves={moves} />
+      <Suspense fallback={<PokemonMoveCardSkeleton />}>
+        <PokemonMovesContainer moves={moves} />
+      </Suspense>
     </Form>
   );
 }

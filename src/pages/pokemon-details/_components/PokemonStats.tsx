@@ -1,12 +1,25 @@
 import AppIcon from "@/components/common/AppIcon";
 import type { PokeAPI } from "pokeapi-types";
 import PokemonStatCard from "./PokemonStatCard";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+} from "@/components/ui/dialog";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
 
 interface PokemonStatsProps {
   pokemonDetails: PokeAPI.Pokemon | undefined;
 }
 
 export default function PokemonStats({ pokemonDetails }: PokemonStatsProps) {
+  const [selectedAbility, setSelectedAbility] = useState<
+    PokeAPI.Ability | undefined
+  >();
   return (
     <div className="space-y-6">
       <div>
@@ -20,6 +33,8 @@ export default function PokemonStats({ pokemonDetails }: PokemonStatsProps) {
             <PokemonStatCard
               pokemonAbility={pokemonAbility}
               key={pokemonAbility.ability.name}
+              onClick={(ability) => setSelectedAbility(ability)}
+              className="cursor-pointer"
             />
           ))}
         </div>
@@ -72,6 +87,27 @@ export default function PokemonStats({ pokemonDetails }: PokemonStatsProps) {
           </div>
         </div>
       </div>
+      <Dialog
+        open={!!selectedAbility}
+        onOpenChange={() => setSelectedAbility(undefined)}>
+        <DialogContent>
+          <DialogHeader className="text-xl">
+            {selectedAbility?.name}
+          </DialogHeader>
+          <DialogDescription>
+            {selectedAbility?.effect_entries.map((ability) => (
+              <div key={ability.short_effect} className="text-center">
+                {ability.effect}
+              </div>
+            ))}
+          </DialogDescription>
+          <DialogFooter>
+            <DialogClose>
+              <Button>Close</Button>
+            </DialogClose>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

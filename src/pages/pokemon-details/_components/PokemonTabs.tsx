@@ -7,7 +7,6 @@ import type { PokeAPI } from "pokeapi-types";
 import PokemonOverviewTab from "./PokemonOverviewTab";
 import PokemonStats from "./PokemonStats";
 import PokemonMovesTab from "./PokemonMovesTab";
-import { Suspense } from "react";
 
 interface PokemonTabsProps {
   pokemonData: PokeAPI.Pokemon | undefined;
@@ -36,9 +35,7 @@ export const PokemonTabs = ({ pokemonData }: PokemonTabsProps) => {
         <PokemonStats pokemonDetails={pokemonData} />
       </TabsContent>
       <TabsContent value="moves">
-        <Suspense fallback={<>testing suspense</>}>
-          <PokemonMovesTab moves={pokemonData?.moves} />
-        </Suspense>
+        <PokemonMovesTab moves={pokemonData?.moves} />
       </TabsContent>
       <TabsContent value="evolution">
         <PokemonEvolution />

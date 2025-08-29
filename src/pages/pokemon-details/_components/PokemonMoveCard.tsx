@@ -6,14 +6,22 @@ import { getPokemonCardColor } from "@/utils/get-pokemon-card-background";
 
 interface PokemonMoveCardProps {
   move: ReturnType<typeof useFetchPokemonMoveDetails>["data"][number];
+  className?: string;
 }
 
-export default function PokemonMoveCard({ move }: PokemonMoveCardProps) {
+export default function PokemonMoveCard({
+  move,
+  className,
+}: PokemonMoveCardProps) {
   const learnMethod =
     move?.version_group_details?.[0].move_learn_method.name ?? "unknown";
   const levelLearned = move?.version_group_details?.[0].level_learned_at ?? 0;
   return (
-    <div className="bg-card p-4 rounded-lg shadow-elevation-1 border border-border hover:shadow-elevation-2 transition-shadow duration-200">
+    <div
+      className={cn(
+        "bg-card p-4 rounded-lg shadow-elevation-1 border border-border hover:shadow-elevation-2 transition-shadow duration-200",
+        className
+      )}>
       <div className="flex items-start justify-between mb-3">
         <div className="flex-1">
           <div className="flex items-center space-x-3 mb-2">

@@ -1,10 +1,10 @@
 import { useStore } from "@/store";
-import PokemonComparisionCard from "./_components/PokemonComparisionCard";
-import { MAX_POKEMON_COMPARISION_CARD_COUNT } from "@/constants";
+import { useState } from "react";
 import AppIcon from "@/components/common/AppIcon";
-import { Suspense, useState } from "react";
+import PokemonSearch from "./_components/PokemonSearch";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
-import Home from "../home";
+import { MAX_POKEMON_COMPARISION_CARD_COUNT } from "@/constants";
+import PokemonComparisionCard from "./_components/PokemonComparisionCard";
 
 export default function ComparePokemon() {
   const selectedPokemon = useStore((state) => state.selectedPokemon);
@@ -34,10 +34,8 @@ export default function ComparePokemon() {
             ))}
       </div>
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent>
-          <Suspense fallback={<>Loading</>}>
-            <Home />
-          </Suspense>
+        <DialogContent className="min-w-96">
+          <PokemonSearch />
         </DialogContent>
       </Dialog>
     </>

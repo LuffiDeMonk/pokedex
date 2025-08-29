@@ -19,6 +19,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { useStore } from "@/store";
+import { useNavigate } from "react-router-dom";
 
 interface PokemonHeroSectionProps {
   pokemonDetails: PokeAPI.Pokemon | undefined;
@@ -29,6 +31,8 @@ export default function PokemonHeroSection({
   pokemonDetails,
   pokemonSpeciesData,
 }: PokemonHeroSectionProps) {
+  const addPokemon = useStore((state) => state.addPokemon);
+  const navigate = useNavigate();
   const POKEMON_STATS: Array<{
     label: string;
     value: string;
@@ -50,6 +54,13 @@ export default function PokemonHeroSection({
       icon: "star",
     },
   ];
+
+  const addPokemonToCompare = () => {
+    if (!pokemonDetails) return null;
+    addPokemon(pokemonDetails);
+    navigate("/pokemon/compare-pokemon");
+  };
+
   return (
     <div
       className={`bg-gradient-to-br bg-opacity-70 ${getPokemonCardColor({
@@ -209,7 +220,8 @@ export default function PokemonHeroSection({
               </Button>
               <Button
                 variant="default"
-                className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 hover:scale-105 transition-all duration-200 px-6 py-3 rounded-2xl font-medium shadow-lg border-0">
+                className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 hover:scale-105 transition-all duration-200 px-6 py-3 rounded-2xl font-medium shadow-lg border-0"
+                onClick={addPokemonToCompare}>
                 <AppIcon name="git-compare" className="size-4" />
                 Compare
               </Button>

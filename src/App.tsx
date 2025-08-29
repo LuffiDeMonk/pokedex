@@ -7,6 +7,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const Home = React.lazy(() => import("./pages/home"));
 const PokemonDetails = React.lazy(() => import("./pages/pokemon-details"));
+const ComparePokemon = React.lazy(() => import("./pages/compare-pokemon"));
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
               </Suspense>
             }
           />
+          <Route path="/pokemon/compare-pokemon" element={<ComparePokemon />} />
         </Route>
       </Routes>
 

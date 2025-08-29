@@ -8,5 +8,6 @@ interface UseStoreProps {
 
 export const useStore = create<UseStoreProps>((set) => ({
   selectedPokemon: [],
-  addPokemon: (pokemon) => set((state) => ({ ...state, pokemon })),
+  addPokemon: (pokemon) =>
+    set((state) => ({ selectedPokemon: [...state.selectedPokemon, pokemon] })),
 }));

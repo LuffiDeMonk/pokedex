@@ -9,6 +9,8 @@ import { formatPokemonStatusTitle } from "@/pages/pokemon-details/utils/formatPo
 import { Image } from "@/components/common/Image";
 import AppIcon from "@/components/common/AppIcon";
 import { PokemonCardSkeleton } from "./PokemonCardSkeleton";
+import { Badge } from "@/components/ui/badge";
+import { getPokemonVariant } from "@/utils/get-pokemon-variant";
 
 interface PokemonCardProps {
   pokemonName: string;
@@ -65,14 +67,12 @@ export const PokemonCard = ({ pokemonName }: PokemonCardProps) => {
         {/* Types */}
         <div className="flex flex-wrap gap-1 mb-3">
           {pokemon?.types?.map((type) => (
-            <PokemonStatusBadge
-              key={type.slot}
-              type={type.type.name}
-              className={cn(
-                "text-white font-normal text-xs",
-                getPokemonCardColor({ pokemonType: type.type.name })
-              )}
-            />
+            <Badge
+              className="text-xs font-normal capitalize"
+              variant={getPokemonVariant(type.type.name)}
+              key={type.type.name}>
+              {type.type.name}
+            </Badge>
           ))}
         </div>
 

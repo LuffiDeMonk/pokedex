@@ -1,4 +1,3 @@
-import { cn } from "@/lib/utils";
 import type { PokeAPI } from "pokeapi-types";
 import { Button } from "@/components/ui/button";
 import AppIcon from "@/components/common/AppIcon";
@@ -6,7 +5,6 @@ import { Image } from "@/components/common/Image";
 import type { IconName } from "lucide-react/dynamic";
 import { getPokemonImage } from "@/utils/get-pokemon-image";
 import { formatPokemonHeight } from "../utils/format-pokemon-height";
-import PokemonStatusBadge from "@/components/common/PokemonStatusBadge";
 import { getPokemonCardColor } from "@/utils/get-pokemon-card-background";
 import { formatPokemonWeight } from "../utils/format-pokemon-weight";
 import {
@@ -21,6 +19,8 @@ import {
 } from "@/components/ui/dialog";
 import { useStore } from "@/store";
 import { useNavigate } from "react-router-dom";
+import { Badge } from "@/components/ui/badge";
+import { getPokemonVariant } from "@/utils/get-pokemon-variant";
 
 interface PokemonHeroSectionProps {
   pokemonDetails: PokeAPI.Pokemon | undefined;
@@ -128,15 +128,13 @@ export default function PokemonHeroSection({
                       <DialogTitle className="capitalize text-xl font-normal">
                         {pokemonDetails?.name}
                       </DialogTitle>
-                      <PokemonStatusBadge
-                        type={"Pokédex Entries"}
-                        className={cn(
-                          "text-white font-normal max-w-full rounded-sm text-xs",
-                          getPokemonCardColor({
-                            pokemonType: pokemonDetails?.types[0].type.name,
-                          })
+                      <Badge
+                        variant={getPokemonVariant(
+                          pokemonDetails?.types[0].type.name
                         )}
-                      />
+                        className="text-xs rounded-sm font-normal">
+                        Pokédex Entries
+                      </Badge>
                     </DialogHeader>
                     <DialogDescription className="p-0 px-4">
                       <div className="max-h-80 overflow-y-auto overflow-hidden space-y-4 hide-scrollbar">
@@ -144,16 +142,11 @@ export default function PokemonHeroSection({
                           <div
                             key={text.flavor_text}
                             className="flex flex-col justify-center items-center gap-1">
-                            <PokemonStatusBadge
-                              type={`Pokédex ${text.version.name}`}
-                              className={cn(
-                                "max-w-fit text-white text-lg font-medium rounded-sm",
-                                getPokemonCardColor({
-                                  pokemonType:
-                                    pokemonDetails?.types[0].type.name,
-                                })
+                            <Badge
+                              variant={getPokemonVariant(
+                                pokemonDetails?.types[0].type.name
                               )}
-                            />
+                              className="text-lg font-medium rounded-sm capitalize">{`Pokédex ${text.version.name}`}</Badge>
                             <p className="text-sm text-center">
                               {text.flavor_text}
                             </p>
@@ -173,16 +166,12 @@ export default function PokemonHeroSection({
               {/* Type Badges */}
               <div className="flex flex-wrap justify-center lg:justify-start gap-3">
                 {pokemonDetails?.types?.map((type) => (
-                  <PokemonStatusBadge
-                    key={type.type.name}
-                    type={type.type.name}
-                    className={cn(
-                      getPokemonCardColor({
-                        pokemonType: type.type.name,
-                      }),
-                      "text-white font-normal"
-                    )}
-                  />
+                  <Badge
+                    className="capitalize"
+                    variant={getPokemonVariant(type.type.name)}
+                    key={type.type.name}>
+                    {type.type.name}
+                  </Badge>
                 ))}
               </div>
             </div>

@@ -1,8 +1,9 @@
 import AppIcon from "@/components/common/AppIcon";
-import PokemonStatusBadge from "@/components/common/PokemonStatusBadge";
+import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import type { useFetchPokemonMoveDetails } from "@/query/use-fetch-pokemon-move-details";
 import { getPokemonCardColor } from "@/utils/get-pokemon-card-background";
+import { getPokemonVariant } from "@/utils/get-pokemon-variant";
 
 interface PokemonMoveCardProps {
   move: ReturnType<typeof useFetchPokemonMoveDetails>["data"][number];
@@ -30,12 +31,11 @@ export default function PokemonMoveCard({
             </h4>
 
             {move?.type && (
-              <PokemonStatusBadge
-                type={move.type.name}
-                className={cn(
-                  getPokemonCardColor({ pokemonType: move.type.name })
-                )}
-              />
+              <Badge
+                variant={getPokemonVariant(move.type.name)}
+                className="capitalize">
+                {move.type.name}
+              </Badge>
             )}
           </div>
 

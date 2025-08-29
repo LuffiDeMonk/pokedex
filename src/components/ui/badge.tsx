@@ -21,7 +21,7 @@ const badgeVariants = cva(
           "bg-pokemon-poison border-pokemon-poison shadow-sm shadow-pokemon-poison/80",
         fire: "bg-pokemon-fire border-pokemon-fire shadow-sm shadow-pokemon-fire/80",
         flying:
-          "bg-pokemon-flying boder-pokemon-flying shadow-sm shadow-pokemon-flying/80",
+          "bg-pokemon-flying border-pokemon-flying shadow-sm shadow-pokemon-flying/80",
         water:
           "bg-pokemon-water border-pokemon-water shadow-sm shadow-pokemon-water/80",
         bug: "bg-pokemon-bug border-pokemon-bug shadow-sm shadow-pokemon-bug/80",

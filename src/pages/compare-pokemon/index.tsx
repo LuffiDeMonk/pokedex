@@ -4,7 +4,6 @@ import { MAX_POKEMON_COMPARISION_CARD_COUNT } from "@/constants";
 import AppIcon from "@/components/common/AppIcon";
 import { Suspense, useState } from "react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
-import PokemonSearch from "./_components/PokemonSearch";
 import Home from "../home";
 
 export default function ComparePokemon() {

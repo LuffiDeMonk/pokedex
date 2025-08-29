@@ -1,5 +1,4 @@
 import { useStore } from "@/store";
-import React from "react";
 
 export default function ComparePokemon() {
   const selectedPokemon = useStore((state) => state.selectedPokemon);

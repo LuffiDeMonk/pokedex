@@ -2,7 +2,6 @@ import AppIcon from "@/components/common/AppIcon";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import type { useFetchPokemonMoveDetails } from "@/query/use-fetch-pokemon-move-details";
-import { getPokemonCardColor } from "@/utils/get-pokemon-card-background";
 import { getPokemonVariant } from "@/utils/get-pokemon-variant";
 
 interface PokemonMoveCardProps {

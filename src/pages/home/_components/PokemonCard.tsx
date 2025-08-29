@@ -1,8 +1,5 @@
-import { cn } from '@/lib/utils';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import { getPokemonImage } from "@/utils/get-pokemon-image";
-import PokemonStatusBadge from "@/components/common/PokemonStatusBadge";
-import { getPokemonCardColor } from "@/utils/get-pokemon-card-background";
 import { useFetchPokemonCardDetails } from "@/query/use-fetch-pokemon-card-details";
 import { Button } from "@/components/ui/button";
 import { formatPokemonStatusTitle } from "@/pages/pokemon-details/utils/formatPokemonStatusTitle";

@@ -18,7 +18,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { useStore } from "@/store";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
 import { getPokemonVariant } from "@/utils/get-pokemon-variant";
 import { useToast } from "@/hooks/use-toast";
@@ -80,6 +80,15 @@ export default function PokemonHeroSection({
       className={`bg-gradient-to-br bg-opacity-70 ${getPokemonCardColor({
         pokemonType: pokemonDetails?.types[0].type.name,
       })} border-b border-border/50 relative overflow-hidden`}>
+      <div className="px-12">
+        <Link to="/" className="flex gap-1 items-center">
+          <AppIcon
+            name="arrow-down"
+            className="rotate-90 stroke-white size-5"
+          />
+          <span className="text-white">Back to home</span>
+        </Link>
+      </div>
       <div className="container mx-auto px-4 py-12 relative">
         <div className="flex flex-col lg:flex-row items-center lg:items-start gap-12">
           {/* Pokemon Image Section */}

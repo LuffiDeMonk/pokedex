@@ -4,16 +4,23 @@ import { useFetchPokemons } from "@/query/use-fetch-pokemons";
 import PokemonSearchCard from "./PokemonSearchCard";
 import { useMemo, useRef, useState } from "react";
 import { useVirtualizer } from "@tanstack/react-virtual";
+import { useStore } from "@/store";
 
 export default function PokemonSearch() {
   const [search, setSearch] = useState("");
   const { data: pokemonListdata } = useFetchPokemons({ limit: 50 });
+  const { selectedPokemon } = useStore();
   const parentDivRef = useRef<HTMLDivElement>(null);
   const filteredList = useMemo(() => {
-    return pokemonListdata.results.filter((item) =>
-      item.name.toLowerCase().includes(search.toLowerCase())
+    const selectedPokemonNames = selectedPokemon.map((item) => item.name);
+    const unSelectedPokemons = pokemonListdata.results.filter(
+      (item) =>
+        !selectedPokemonNames.some((x) => x === item.name) &&
+        item.name.includes(search)
     );
-  }, [search]);
+    return unSelectedPokemons;
+  }, [search, selectedPokemon]);
+
   const rowVirtualizer = useVirtualizer({
     count: filteredList.length,
     getScrollElement: () => parentDivRef.current,

@@ -1,37 +1,36 @@
 import { useNavigate } from "react-router-dom";
 import { getPokemonImage } from "@/utils/get-pokemon-image";
-import { useFetchPokemonCardDetails } from "@/query/use-fetch-pokemon-card-details";
 import { Button } from "@/components/ui/button";
 import { formatPokemonStatusTitle } from "@/pages/pokemon-details/utils/formatPokemonStatusTitle";
 import { Image } from "@/components/common/Image";
 import AppIcon from "@/components/common/AppIcon";
-import { PokemonCardSkeleton } from "./PokemonCardSkeleton";
 import { Badge } from "@/components/ui/badge";
 import { getPokemonVariant } from "@/utils/get-pokemon-variant";
+import type { PokeAPI } from "pokeapi-types";
+import { cn } from "@/lib/utils";
+import { getPokemonCardColor } from "@/utils/get-pokemon-card-background";
 
 interface PokemonCardProps {
-  pokemonName: string;
+  pokemon: PokeAPI.Pokemon;
 }
 
-export const PokemonCard = ({ pokemonName }: PokemonCardProps) => {
-  const { data: pokemon, isLoading: isPokemonLoading } =
-    useFetchPokemonCardDetails({ pokemonName });
+export const PokemonCard = ({ pokemon }: PokemonCardProps) => {
   const navigate = useNavigate();
   const handleCardClick = () => {
     if (typeof pokemon === "undefined") return;
     navigate(`/pokemon/${pokemon.name}`);
   };
 
-  if (isPokemonLoading) {
-    return <PokemonCardSkeleton />;
-  }
-
   return (
     <div
       className="bg-card rounded-xl border border-border shadow-elevation-1 hover:shadow-elevation-2 transition-all duration-300 cursor-pointer group hover:scale-102 overflow-hidden"
       onClick={handleCardClick}>
       {/* Pokemon Image */}
-      <div className="relative bg-gradient-to-br from-muted/50 to-muted p-4 aspect-square">
+      <div
+        className={cn(
+          "relative p-4 aspect-square",
+          getPokemonCardColor({ pokemonType: pokemon.types?.[0].type.name })
+        )}>
         <Image
           src={getPokemonImage({ pokemonId: String(pokemon?.id) })}
           alt={pokemon?.name}

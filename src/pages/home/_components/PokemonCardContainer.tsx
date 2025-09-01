@@ -17,7 +17,7 @@ export default function PokemonCardContainer({
 }: PokemonCardContainerProps) {
   const form = useFormContext<FormProps>();
   const filteredPokemonData = () => {
-    const selectedTypes = form.getValues("type").map((t) => t.toLowerCase());
+    const selectedTypes = form.watch("type").map((t) => t.toLowerCase());
 
     return pokemonData.filter((pokemon) =>
       selectedTypes.every((selected) =>

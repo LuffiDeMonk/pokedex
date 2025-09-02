@@ -1,12 +1,11 @@
 import type { PokeAPI } from "pokeapi-types";
 import { PokemonCard } from "./PokemonCard";
 import { useFormContext } from "react-hook-form";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import useResizeObserver from "@/hooks/use-resize-observer";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
 
 // TODO: need to refactor the hooks and constants into separate.
-
 
 interface PokemonCardContainerProps {
   pokemonData: PokeAPI.Pokemon[];
@@ -29,7 +28,7 @@ export default function PokemonCardContainer({
 }: PokemonCardContainerProps) {
   const form = useFormContext<FormProps>();
   const filters = form.watch();
-  const filteredPokemonData = () => {
+  const filteredPokemonData = useMemo(() => {
     const selectedTypes = filters.type.map((t) => t.toLowerCase());
 
     return pokemonData.filter(
@@ -40,65 +39,36 @@ export default function PokemonCardContainer({
           )
         ) && pokemon.name.toLowerCase().includes(filters.search.toLowerCase())
     );
-  };
+  }, [filters]);
 
   const parentRef = useRef<HTMLDivElement>(null);
 
-  const getItemWidth = (width: number, columns: number, gapX: number) => {
-    return Math.floor((width - (columns - 1) * gapX) / columns);
+  const getItemWidth = (width: number, columns: number) => {
+    return Math.floor((width - (columns - 1) * 10) / columns);
   };
 
-  const getItemHeight = (_width: number, itemWidth: number) => {
+  const getItemHeight = (itemWidth: number) => {
     return itemWidth / ITEM_RATIO;
-  };
-  const getItemGap = (width: number) => {
-    // if (width <= BREAKPOINT.xs) {
-    //   return {
-    //     x: 0,
-    //     y: 7.5,
-    //   };
-    // }
-
-    if (width <= BREAKPOINT.md) {
-      return {
-        x: 7.5,
-        y: 7.5,
-      };
-    }
-
-    return {
-      x: 10,
-      y: 10,
-    };
   };
 
   const getColumnsCount = (width: number) => {
-    if (width <= BREAKPOINT.xs) {
-      return 2;
+    switch (true) {
+      case width <= BREAKPOINT.sm:
+        return 2;
+      case width <= BREAKPOINT.md:
+        return 3;
+      case width <= BREAKPOINT.lg:
+        return 5;
+      default:
+        return 7;
     }
-if (width <= BREAKPOINT.sm) return 2;
-    if (width <= BREAKPOINT.md) {
-      return 3;
-    }
-
-    if (width <= BREAKPOINT.lg) {
-      return 5;
-    }
-
-    return 7;
   };
 
-  const initialGap = getItemGap(window.innerWidth);
   const initialColumns = getColumnsCount(window.innerWidth);
-  const initialItemWidth = getItemWidth(
-    window.innerWidth,
-    initialColumns,
-    initialGap.x
-  );
-  const initialItemHeight = getItemHeight(window.innerWidth, initialItemWidth);
+  const initialItemWidth = getItemWidth(window.innerWidth, initialColumns);
+  const initialItemHeight = getItemHeight(initialItemWidth);
 
   const [columns, setColumns] = useState(initialColumns);
-  const [_gap, setGap] = useState(initialGap);
   const [itemSize, setItemSize] = useState({
     width: initialItemWidth,
     height: initialItemHeight,
@@ -107,7 +77,7 @@ if (width <= BREAKPOINT.sm) return 2;
   const { width: containerWidth } = useResizeObserver(parentRef);
 
   const rowVirtualizer = useWindowVirtualizer({
-    count: Math.ceil(filteredPokemonData().length / columns),
+    count: Math.ceil(filteredPokemonData.length / columns),
     estimateSize: () => itemSize.height,
     gap: 10,
   });
@@ -119,19 +89,12 @@ if (width <= BREAKPOINT.sm) return 2;
     gap: 10,
   });
 
-  useEffect(() => {
-    rowVirtualizer.measure();
-    columnVirtualizer.measure();
-  }, [itemSize.height, columns]);
-
   const handleResize = () =>
     setTimeout(() => {
-      const gap = getItemGap(containerWidth);
       const column = getColumnsCount(containerWidth);
-      const itemWidth = getItemWidth(containerWidth, column, gap.x);
-      const itemHeight = getItemHeight(containerWidth, itemWidth);
+      const itemWidth = getItemWidth(containerWidth, column);
+      const itemHeight = getItemHeight(itemWidth);
 
-      setGap(gap);
       setColumns(column);
       setItemSize({
         width: itemWidth,
@@ -152,7 +115,7 @@ if (width <= BREAKPOINT.sm) return 2;
         {rowVirtualizer.getVirtualItems().flatMap((virtualRow) =>
           columnVirtualizer.getVirtualItems().map((virtualColumn) => {
             const itemIndex = virtualRow.index * columns + virtualColumn.index;
-            if (itemIndex >= filteredPokemonData().length) {
+            if (itemIndex >= filteredPokemonData.length) {
               return null;
             }
 
@@ -166,7 +129,7 @@ if (width <= BREAKPOINT.sm) return 2;
                   height: itemSize.height,
                   transform: `translate3d(${virtualColumn.start}px, ${virtualRow.start}px, 0)`,
                 }}>
-                <PokemonCard pokemon={filteredPokemonData()[itemIndex]} />
+                <PokemonCard pokemon={filteredPokemonData[itemIndex]} />
               </div>
             );
           })

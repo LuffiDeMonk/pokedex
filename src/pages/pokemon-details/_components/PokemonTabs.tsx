@@ -16,7 +16,7 @@ export const PokemonTabs = ({ pokemonData }: PokemonTabsProps) => {
   const pokemonBaseType = getPokemonVariant(pokemonData?.types[0].type.name);
   return (
     <Tabs defaultValue={POKEMON_TABS_TRIGGER_LIST[0].value} className="w-full">
-      <TabsList className="flex items-center justify-start gap-2 px-10 bg-white">
+      <TabsList className="flex items-center justify-start gap-2 px-2 xl:px-10 bg-white overflow-hidden overflow-x-auto hide-scrollbar">
         {POKEMON_TABS_TRIGGER_LIST.map((trigger) => (
           <TabsTrigger
             key={trigger.value}

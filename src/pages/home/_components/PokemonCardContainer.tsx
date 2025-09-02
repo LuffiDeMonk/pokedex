@@ -76,7 +76,7 @@ export default function PokemonCardContainer({
     if (width <= BREAKPOINT.xs) {
       return 2;
     }
-
+if (width <= BREAKPOINT.sm) return 2;
     if (width <= BREAKPOINT.md) {
       return 3;
     }

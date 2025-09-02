@@ -5,6 +5,9 @@ import { useEffect, useRef, useState } from "react";
 import useResizeObserver from "@/hooks/use-resize-observer";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
 
+// TODO: need to refactor the hooks and constants into separate.
+
+
 interface PokemonCardContainerProps {
   pokemonData: PokeAPI.Pokemon[];
 }
@@ -17,6 +20,7 @@ interface FormProps {
 const BREAKPOINT = {
   xs: 375,
   sm: 640,
+  md: 768,
   lg: 1024,
 };
 const ITEM_RATIO = 0.57 / 1;
@@ -44,22 +48,18 @@ export default function PokemonCardContainer({
     return Math.floor((width - (columns - 1) * gapX) / columns);
   };
 
-  const getItemHeight = (width: number, itemWidth: number) => {
-    if (width >= BREAKPOINT.sm) {
-      return itemWidth / ITEM_RATIO;
-    }
-
-    return itemWidth;
+  const getItemHeight = (_width: number, itemWidth: number) => {
+    return itemWidth / ITEM_RATIO;
   };
   const getItemGap = (width: number) => {
-    if (width <= BREAKPOINT.xs) {
-      return {
-        x: 0,
-        y: 7.5,
-      };
-    }
+    // if (width <= BREAKPOINT.xs) {
+    //   return {
+    //     x: 0,
+    //     y: 7.5,
+    //   };
+    // }
 
-    if (width <= BREAKPOINT.sm) {
+    if (width <= BREAKPOINT.md) {
       return {
         x: 7.5,
         y: 7.5,
@@ -77,8 +77,12 @@ export default function PokemonCardContainer({
       return 2;
     }
 
-    if (width <= BREAKPOINT.sm) {
+    if (width <= BREAKPOINT.md) {
       return 3;
+    }
+
+    if (width <= BREAKPOINT.lg) {
+      return 5;
     }
 
     return 7;
@@ -105,7 +109,7 @@ export default function PokemonCardContainer({
   const rowVirtualizer = useWindowVirtualizer({
     count: Math.ceil(filteredPokemonData().length / columns),
     estimateSize: () => itemSize.height,
-    gap:10
+    gap: 10,
   });
 
   const columnVirtualizer = useWindowVirtualizer({

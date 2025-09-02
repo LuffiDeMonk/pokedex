@@ -140,8 +140,8 @@ export default function PokemonHeroSection({
                 </h1>
                 <Dialog>
                   <DialogTrigger>
-                    {pokemonSpeciesData?.genera?.map((type, index) => (
-                      <div key={index} className={`text-xl`}>
+                    {pokemonSpeciesData?.genera?.map((type) => (
+                      <div key={type.genus} className={`text-xl`}>
                         {type.genus}
                       </div>
                     ))}
@@ -159,11 +159,11 @@ export default function PokemonHeroSection({
                         Pokédex Entries
                       </Badge>
                     </DialogHeader>
-                    <DialogDescription className="p-0 px-4">
+                    <DialogDescription asChild className="p-0 px-4">
                       <div className="max-h-80 overflow-y-auto overflow-hidden space-y-4 hide-scrollbar">
                         {pokemonSpeciesData?.flavor_text_entries.map((text) => (
                           <div
-                            key={text.flavor_text}
+                            key={text.version.url}
                             className="flex flex-col justify-center items-center gap-1">
                             <Badge
                               variant={getPokemonVariant(
@@ -178,7 +178,7 @@ export default function PokemonHeroSection({
                       </div>
                     </DialogDescription>
                     <DialogFooter>
-                      <DialogClose>
+                      <DialogClose asChild>
                         <Button>Close</Button>
                       </DialogClose>
                     </DialogFooter>

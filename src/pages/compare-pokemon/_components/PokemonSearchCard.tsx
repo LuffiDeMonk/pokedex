@@ -56,6 +56,7 @@ export default function PokemonSearchCard({
             <div className="space-x-2">
               {pokemonDetails?.types.map((type) => (
                 <Badge
+                  key={type.type.name}
                   variant={getPokemonVariant(type.type.name)}
                   className="text-[10px] font-normal px-1 py-0">
                   {type.type.name}

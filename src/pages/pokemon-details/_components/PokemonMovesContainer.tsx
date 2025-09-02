@@ -57,7 +57,10 @@ export default function PokemonMovesContainer({
     <>
       <div className="space-y-3 hide-scrollbar max-h-[80dvh] overflow-hidden overflow-y-auto">
         {filteredData?.map((move) => (
-          <div className="w-full" onClick={() => setSelectedMove(move)}>
+          <div
+            className="w-full"
+            key={move.id}
+            onClick={() => setSelectedMove(move)}>
             <PokemonMoveCard move={move} className="cursor-pointer" />
           </div>
         ))}
@@ -68,14 +71,14 @@ export default function PokemonMovesContainer({
         <DialogContent>
           <DialogHeader className="text-xl">{selecltedMove?.name}</DialogHeader>
           <DialogDescription>
-            {selecltedMove?.effect_entries.map((move) => (
-              <div key={move.short_effect} className="text-center">
+            {selecltedMove?.effect_entries.map((move, index) => (
+              <span key={index} className="text-center">
                 {move.effect}
-              </div>
+              </span>
             ))}
           </DialogDescription>
           <DialogFooter>
-            <DialogClose>
+            <DialogClose asChild>
               <Button>Close</Button>
             </DialogClose>
           </DialogFooter>

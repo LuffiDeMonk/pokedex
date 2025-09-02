@@ -63,7 +63,7 @@ export default function PokemonPhysicalCharacteristics({
     },
     {
       name: "Habitat",
-      value: pokemonSpecies?.habitat.name ?? "Unknown",
+      value: pokemonSpecies?.habitat?.name ?? "Unknown",
       description: "Natural environment",
       icon: (
         <AppIcon
@@ -83,7 +83,7 @@ export default function PokemonPhysicalCharacteristics({
       </h3>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {POKEMON_CHARACTERISTICS.map((characteristic) => (
+        {POKEMON_CHARACTERISTICS?.map((characteristic) => (
           <Card className="p-6" key={characteristic.name}>
             <CardContent className="flex items-center justify-between p-0">
               <div className="flex items-center">

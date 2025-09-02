@@ -8,7 +8,7 @@ import { Form } from "@/components/ui/form";
 import PokemonCardContainer from "./_components/PokemonCardContainer";
 
 export default function Home() {
-  const { data: pokemonListdata } = useFetchPokemons({ limit: 50 });
+  const { data: pokemonListdata } = useFetchPokemons({ limit: 400 });
   const { data: pokemonData } = useSuspenseQueries({
     queries: pokemonListdata.results.map((pokemon) => ({
       queryKey: ["pokemon", "card", "details", { pokemonName: pokemon.name }],

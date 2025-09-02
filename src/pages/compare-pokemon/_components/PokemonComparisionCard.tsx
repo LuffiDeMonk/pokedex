@@ -42,6 +42,7 @@ export default function PokemonComparisionCard({
         <div className="flex gap-2 items-center justify-center">
           {pokemon.types.map((type) => (
             <Badge
+              key={type.type.name}
               className="capitalize font-normal w-fit text-xs"
               variant={getPokemonVariant(type.type.name)}>
               {type.type.name}

@@ -40,10 +40,10 @@ export default function PokemonMoveCard({
 
           {move?.effect_entries
             .filter((item) => item.language.name === "en")
-            .map((item) => (
+            .map((item, index) => (
               <p
-                className="text-sm text-muted-foreground leading-relaxed mb-3"
-                key={item.short_effect}>
+                key={index}
+                className="text-sm text-muted-foreground leading-relaxed mb-3">
                 {item.short_effect}
               </p>
             ))}

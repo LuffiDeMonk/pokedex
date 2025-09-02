@@ -96,13 +96,13 @@ export default function PokemonStats({ pokemonDetails }: PokemonStatsProps) {
           </DialogHeader>
           <DialogDescription>
             {selectedAbility?.effect_entries.map((ability) => (
-              <div key={ability.short_effect} className="text-center">
+              <span key={ability.short_effect} className="text-center">
                 {ability.effect}
-              </div>
+              </span>
             ))}
           </DialogDescription>
           <DialogFooter>
-            <DialogClose>
+            <DialogClose asChild>
               <Button>Close</Button>
             </DialogClose>
           </DialogFooter>

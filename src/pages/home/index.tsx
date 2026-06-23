@@ -1,4 +1,4 @@
-import { useFetchPokemons } from '@/query/use-fetch-pokemons';
+import { useFetchPokemons } from "@/query/use-fetch-pokemons";
 import { useSuspenseQueries } from "@tanstack/react-query";
 import { fetchPokemonCardDetails } from "@/api-client/fetch-pokemon-card-details";
 import { getQueryStaleTime } from "@/utils/get-query-stale-time";
@@ -6,7 +6,7 @@ import Filters from "./_components/Filters";
 import { useForm } from "react-hook-form";
 import { Form } from "@/components/ui/form";
 import PokemonCardContainer from "./_components/PokemonCardContainer";
-
+import * as Sentry from "@sentry/react";
 export default function Home() {
   const { data: pokemonListdata } = useFetchPokemons({ limit: 400 });
   const { data: pokemonData } = useSuspenseQueries({
@@ -24,6 +24,13 @@ export default function Home() {
       };
     },
   });
+
+  Sentry.logger.trace("Entering function", { fn: "processOrder" });
+  Sentry.logger.debug("Cache lookup", { key: "user:123" });
+  Sentry.logger.info("Order created", { orderId: "order_456" });
+  Sentry.logger.warn("Rate limit approaching", { current: 95, max: 100 });
+  Sentry.logger.error("Payment failed", { reason: "card_declined" });
+  Sentry.logger.fatal("Database unavailable", { host: "primary" });
   interface FormProps {
     search: string;
     type: string[];
